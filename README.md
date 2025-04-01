@@ -10,7 +10,7 @@ This project demonstrates automated end-to-end testing using **Robot Framework**
 
 ## 🧪 Test Flow
 
-The Robot Framework test covers:
+The Robot Framework test covers;
 
 1. ✅ Login with valid credentials
 2. 🛒 Adding products to the cart
