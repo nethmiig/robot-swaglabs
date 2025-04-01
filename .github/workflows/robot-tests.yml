@@ -22,8 +22,12 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install robotframework robotframework-seleniumlibrary
-          # or, if you have a requirements.txt:
-          # pip install -r requirements.txt
+
+      - name: Install Chrome and ChromeDriver
+        run: |
+          sudo apt update
+          sudo apt install -y chromium-browser chromium-chromedriver
+          sudo ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver
 
       - name: Run Robot tests
         run: robot tests/

@@ -1,8 +1,22 @@
-
 *** Settings ***
-Library    SeleniumLibrary
-Suite Setup    Open Browser    ${URL}    chrome    options=--headless,--no-sandbox,--disable-dev-shm-usage
+Library           SeleniumLibrary
+Suite Setup       Open Chrome Headless
 Suite Teardown    Close Browser
+
+*** Variables ***
+${URL}            https://nethmiig.github.io/robot-swaglabs/swag_labs.html
+${USERNAME}       standard_user
+${PASSWORD}       secret_sauce
+
+*** Keywords ***
+Open Chrome Headless
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
+    Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    Create Webdriver    Chrome    chrome_options=${options}
+    Go To    ${URL}
+
 
 *** Variables ***
 ${URL}    https://nethmiig.github.io/robot-swaglabs/swag_labs.html
