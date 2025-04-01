@@ -4,7 +4,8 @@ Suite Setup    Open Browser    ${URL}    chrome    options=add_argument(--headle
 Suite Teardown    Close Browser
 
 *** Variables ***
-${URL}    https://your_username.github.io/your_repo/swag_labs.html
+${URL}    https://nethmiig.github.io/robot-swaglabs/swag_labs.html
+
 ${USERNAME}    standard_user
 ${PASSWORD}    secret_sauce
 
