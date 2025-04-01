@@ -21,13 +21,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install robotframework robotframework-seleniumlibrary
+          pip install robotframework robotframework-selenium library
 
-      - name: Install Chrome and ChromeDriver
+      - name: Install Google Chrome
         run: |
-          sudo apt update
-          sudo apt install -y chromium-browser chromium-chromedriver
-          sudo ln -s /usr/bin/chromedriver /usr/local/bin/chromedriver
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+
 
       - name: Run Robot tests
         run: robot tests/
