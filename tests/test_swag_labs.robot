@@ -1,6 +1,7 @@
+
 *** Settings ***
 Library    SeleniumLibrary
-Suite Setup    Open Browser    ${URL}    chrome    options=add_argument(--headless)
+Suite Setup    Open Browser    ${URL}    chrome    options=--headless,--no-sandbox,--disable-dev-shm-usage
 Suite Teardown    Close Browser
 
 *** Variables ***
