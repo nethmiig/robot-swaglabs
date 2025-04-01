@@ -1,49 +1,187 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.9.13 on win32)" generated="2025-04-02T00:45:22.996060" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2.2 (Python 3.9.13 on win32)" generated="2025-04-02T01:07:56.779861" rpa="false" schemaversion="5">
 <suite id="s1" name="Test Swag Labs" source="C:\Users\niras\PycharmProjects\swaglabs-robot-tests\tests\test_swag_labs.robot">
-<kw name="Open Browser To Login Page" type="SETUP">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-04-02T00:45:23.216950" level="INFO">Opening browser 'Chrome' to base url 'https://nethmiig.github.io/robot-swaglabs/swag_labs.html'.</msg>
-<msg time="2025-04-02T00:45:23.220953" level="INFO">Cannot capture screenshot because no browser is open.</msg>
-<msg time="2025-04-02T00:45:23.220953" level="FAIL">AttributeError: 'Options' object has no attribute 'add_argument:--headless'</msg>
+<kw name="Open Chrome Headless" type="SETUP">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-04-02T01:07:56.992773" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x000001F2DED77B20&gt;</msg>
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys, selenium.webdriver</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-04-02T01:07:56.991778" elapsed="0.000995"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--headless</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-04-02T01:07:56.992773" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--no-sandbox</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-04-02T01:07:56.992773" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-dev-shm-usage</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2025-04-02T01:07:56.992773" elapsed="0.000000"/>
+</kw>
+<kw name="Create Webdriver" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:07:56.993773" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<arg>Chrome</arg>
+<arg>options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<status status="PASS" start="2025-04-02T01:07:56.992773" elapsed="3.055866"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:00.049640" level="INFO">Opening url 'https://nethmiig.github.io/robot-swaglabs/swag_labs.html'</msg>
 <arg>${URL}</arg>
-<arg>${BROWSER}</arg>
-<arg>options=add_argument:--headless</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="FAIL" start="2025-04-02T00:45:23.215950" elapsed="0.007016">AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-04-02T01:08:00.049640" elapsed="0.288312"/>
 </kw>
 <kw name="Maximize Browser Window" owner="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="NOT RUN" start="2025-04-02T00:45:23.222966" elapsed="0.000000"/>
+<status status="PASS" start="2025-04-02T01:08:00.337952" elapsed="0.023002"/>
 </kw>
 <kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
 <arg>id=username</arg>
 <arg>timeout=10s</arg>
 <doc>Waits until the element ``locator`` is visible.</doc>
-<status status="NOT RUN" start="2025-04-02T00:45:23.222966" elapsed="0.000000"/>
+<status status="PASS" start="2025-04-02T01:08:00.362357" elapsed="0.025545"/>
 </kw>
-<status status="FAIL" start="2025-04-02T00:45:23.214987" elapsed="0.007979">AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+<status status="PASS" start="2025-04-02T01:07:56.991778" elapsed="3.396124"/>
 </kw>
-<test id="s1-t1" name="End-to-End Purchase Flow" line="13">
-<doc>Full purchase flow: Login &gt; Add to cart &gt; Checkout &gt; Confirm order</doc>
-<status status="FAIL" start="2025-04-02T00:45:23.222966" elapsed="0.000990">Parent suite setup failed:
-AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+<test id="s1-t1" name="E2E Swag Labs Purchase Flow" line="12">
+<kw name="Log In To SwagLabs">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:00.390899" level="INFO">Typing text 'standard_user' into text field 'id=username'.</msg>
+<arg>id=username</arg>
+<arg>${USERNAME}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:00.390899" elapsed="0.090650"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:00.482572" level="INFO">Typing text 'secret_sauce' into text field 'id=password'.</msg>
+<arg>id=password</arg>
+<arg>${PASSWORD}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:00.482572" elapsed="0.053359"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:00.535931" level="INFO">Clicking button 'id=login-button'.</msg>
+<arg>id=login-button</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:00.535931" elapsed="0.053087"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=products-grid</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-02T01:08:00.589018" elapsed="1.116437"/>
+</kw>
+<status status="PASS" start="2025-04-02T01:08:00.389900" elapsed="1.315555"/>
+</kw>
+<kw name="Add Items To Cart">
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:01.706461" level="INFO">Clicking button 'xpath=(//button[contains(text(),"Add to Cart")])[1]'.</msg>
+<arg>xpath=(//button[contains(text(),"Add to Cart")])[1]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:01.706461" elapsed="0.055022"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:01.762849" level="INFO">Clicking button 'xpath=(//button[contains(text(),"Add to Cart")])[2]'.</msg>
+<arg>xpath=(//button[contains(text(),"Add to Cart")])[2]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:01.762849" elapsed="0.070622"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:01.833471" level="INFO">Clicking element 'xpath=//div[@class="cart-icon"]'.</msg>
+<arg>xpath=//div[@class="cart-icon"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:01.833471" elapsed="0.091024"/>
+</kw>
+<status status="PASS" start="2025-04-02T01:08:01.705455" elapsed="0.219040"/>
+</kw>
+<kw name="Proceed To Checkout And Remove One Item">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=checkout-page</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-02T01:08:01.925476" elapsed="0.017478"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:01.944034" level="INFO">Clicking button 'xpath=(//button[contains(text(),"Remove")])[1]'.</msg>
+<arg>xpath=(//button[contains(text(),"Remove")])[1]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:01.942954" elapsed="0.074508"/>
+</kw>
+<status status="PASS" start="2025-04-02T01:08:01.924495" elapsed="0.092967"/>
+</kw>
+<kw name="Fill Out Form And Finalize Purchase">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:02.018463" level="INFO">Typing text 'Nethmi' into text field 'id=first-name'.</msg>
+<arg>id=first-name</arg>
+<arg>Nethmi</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:02.018463" elapsed="0.085427"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:02.103890" level="INFO">Typing text 'Gamage' into text field 'id=last-name'.</msg>
+<arg>id=last-name</arg>
+<arg>Gamage</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:02.103890" elapsed="0.050000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:02.153890" level="INFO">Typing text '50100' into text field 'id=postal-code'.</msg>
+<arg>id=postal-code</arg>
+<arg>50100</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:02.153890" elapsed="0.051628"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:02.205518" level="INFO">Clicking button 'xpath=//button[contains(text(),"Complete Purchase")]'.</msg>
+<arg>xpath=//button[contains(text(),"Complete Purchase")]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-04-02T01:08:02.205518" elapsed="0.055027"/>
+</kw>
+<status status="PASS" start="2025-04-02T01:08:02.017462" elapsed="0.243083"/>
+</kw>
+<kw name="Confirm Success Message">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=confirmation-page</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2025-04-02T01:08:02.261541" elapsed="0.018144"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2025-04-02T01:08:02.287683" level="INFO">Current page contains element 'xpath=//h2[contains(text(),"Thank You For Your Order!")]'.</msg>
+<arg>xpath=//h2[contains(text(),"Thank You For Your Order!")]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2025-04-02T01:08:02.279685" elapsed="0.007998"/>
+</kw>
+<status status="PASS" start="2025-04-02T01:08:02.261541" elapsed="0.027143"/>
+</kw>
+<doc>Full flow: login → add items → checkout → remove item → confirm order.</doc>
+<status status="PASS" start="2025-04-02T01:08:00.388900" elapsed="1.899784"/>
 </test>
 <kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-04-02T00:45:23.224955" elapsed="0.000000"/>
+<status status="PASS" start="2025-04-02T01:08:02.289682" elapsed="2.161671"/>
 </kw>
-<status status="FAIL" start="2025-04-02T00:45:22.997065" elapsed="0.227890">Suite setup failed:
-AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+<status status="PASS" start="2025-04-02T01:07:56.780861" elapsed="7.670492"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Test Swag Labs" id="s1" pass="0" fail="1" skip="0">Test Swag Labs</stat>
+<stat name="Test Swag Labs" id="s1" pass="1" fail="0" skip="0">Test Swag Labs</stat>
 </suite>
 </statistics>
 <errors>

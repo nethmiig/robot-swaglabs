@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fcbca35e-610b-4f87-b393-74c5e92b656e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/swag_labs.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/swag_labs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_swag_labs.robot" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_swag_labs.robot" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
