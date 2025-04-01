@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.9.13 on win32)" generated="2025-04-02T00:45:22.996060" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Swag Labs" source="C:\Users\niras\PycharmProjects\swaglabs-robot-tests\tests\test_swag_labs.robot">
+<kw name="Open Browser To Login Page" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-04-02T00:45:23.216950" level="INFO">Opening browser 'Chrome' to base url 'https://nethmiig.github.io/robot-swaglabs/swag_labs.html'.</msg>
+<msg time="2025-04-02T00:45:23.220953" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<msg time="2025-04-02T00:45:23.220953" level="FAIL">AttributeError: 'Options' object has no attribute 'add_argument:--headless'</msg>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>options=add_argument:--headless</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="FAIL" start="2025-04-02T00:45:23.215950" elapsed="0.007016">AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="NOT RUN" start="2025-04-02T00:45:23.222966" elapsed="0.000000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>id=username</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" start="2025-04-02T00:45:23.222966" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-04-02T00:45:23.214987" elapsed="0.007979">AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+</kw>
+<test id="s1-t1" name="End-to-End Purchase Flow" line="13">
+<doc>Full purchase flow: Login &gt; Add to cart &gt; Checkout &gt; Confirm order</doc>
+<status status="FAIL" start="2025-04-02T00:45:23.222966" elapsed="0.000990">Parent suite setup failed:
+AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+</test>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-02T00:45:23.224955" elapsed="0.000000"/>
+</kw>
+<status status="FAIL" start="2025-04-02T00:45:22.997065" elapsed="0.227890">Suite setup failed:
+AttributeError: 'Options' object has no attribute 'add_argument:--headless'</status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Swag Labs" id="s1" pass="0" fail="1" skip="0">Test Swag Labs</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

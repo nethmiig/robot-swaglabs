@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -21,13 +22,14 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install robotframework robotframework-selenium library
+          pip install robotframework robotframework-seleniumlibrary
+          pip install webdrivermanager
+          webdrivermanager chrome --linkpath /usr/local/bin
 
       - name: Install Google Chrome
         run: |
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
-
 
       - name: Run Robot tests
         run: robot tests/
