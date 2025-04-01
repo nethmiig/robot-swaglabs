@@ -14,7 +14,8 @@ Open Chrome Headless
     Call Method    ${options}    add_argument    --headless
     Call Method    ${options}    add_argument    --no-sandbox
     Call Method    ${options}    add_argument    --disable-dev-shm-usage
-    Create Webdriver    Chrome    chrome_options=${options}
+    Create Webdriver    Chrome    options=${options}
+
     Go To    ${URL}
 
 
