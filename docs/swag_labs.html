@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swag Labs</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-form {
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #e2231a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #c41c15;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .error-message {
+            color: red;
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .product-container {
+            display: none;
+            padding: 20px;
+        }
+        .header {
+            background: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e2231a;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        .checkout-container {
+            display: none;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .cart-items {
+            margin: 20px 0;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .logout-btn {
+            padding: 8px 16px;
+            background: #666;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: auto;
+        }
+        .back-btn {
+            margin-bottom: 20px;
+            width: auto;
+            background: #666;
+        }
+        .confirmation-container {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 100px auto;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .confirmation-container h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="login-page">
+        <div class="login-logo">
+            <h1>Swag Labs</h1>
+        </div>
+        <div class="login-form">
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" />
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" />
+            </div>
+            <button onclick="login()" id="login-button">Login</button>
+            <div class="error-message" id="error-message">Invalid credentials</div>
+        </div>
+    </div>
+
+    <div class="product-container" id="product-page">
+        <div class="header">
+            <h1>Products</h1>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+                <div class="cart-icon" onclick="showCheckout()">
+                    🛒 <span class="cart-count" id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="products-grid" id="products-grid"></div>
+    </div>
+
+    <div class="checkout-container" id="checkout-page">
+        <button class="back-btn" onclick="backToProducts()">← Back to Products</button>
+        <h2>Checkout</h2>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="login-form">
+            <div class="form-group">
+                <input type="text" id="first-name" placeholder="First Name" />
+            </div>
+            <div class="form-group">
+                <input type="text" id="last-name" placeholder="Last Name" />
+            </div>
+            <div class="form-group">
+                <input type="text" id="postal-code" placeholder="Postal Code" />
+            </div>
+            <p id="total-amount" style="text-align: right; font-weight: bold;"></p>
+            <button onclick="completeCheckout()">Complete Purchase</button>
+        </div>
+    </div>
+
+    <div class="confirmation-container" id="confirmation-page">
+        <h2>Thank You For Your Order!</h2>
+        <p id="confirmation-message"></p>
+        <button onclick="backToProducts()" style="max-width: 200px; margin-top: 20px;">Back to Products</button>
+    </div>
+
+    <script>
+        const validCredentials = {
+            username: 'standard_user',
+            password: 'secret_sauce'
+        };
+
+        const products = [
+            {
+                id: 1,
+                name: 'Sauce Labs Backpack',
+                price: 29.99,
+                description: 'Carry all the things with the sleek, streamlined Sly Pack.',
+                image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg'
+            },
+            {
+                id: 2,
+                name: 'Sauce Labs Bike Light',
+                price: 9.99,
+                description: 'A red light isn\'t the desired state in testing but it sure helps when riding your bike at night.',
+                image: 'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg'
+            },
+            {
+                id: 3,
+                name: 'Sauce Labs Bolt T-Shirt',
+                price: 15.99,
+                description: 'Get your testing superhero on with the Sauce Labs bolt T-shirt.',
+                image: 'https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg'
+            },
+            {
+                id: 4,
+                name: 'Sauce Labs Fleece Jacket',
+                price: 49.99,
+                description: 'It\'s not every day that you come across a midweight quarter-zip fleece jacket.',
+                image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg'
+            }
+        ];
+
+        let cart = [];
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginButton = document.getElementById('login-button');
+            
+            loginButton.disabled = true;
+            loginButton.textContent = 'Logging in...';
+
+            setTimeout(() => {
+                if (username === validCredentials.username && password === validCredentials.password) {
+                    document.getElementById('login-page').style.display = 'none';
+                    document.getElementById('product-page').style.display = 'block';
+                    document.getElementById('error-message').style.display = 'none';
+                    loadProducts();
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+                }
+                loginButton.disabled = false;
+                loginButton.textContent = 'Login';
+            }, 1000);
+        }
+
+        function logout() {
+            document.getElementById('login-page').style.display = 'block';
+            document.getElementById('product-page').style.display = 'none';
+            document.getElementById('checkout-page').style.display = 'none';
+            document.getElementById('confirmation-page').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            cart = [];
+            updateCartCount();
+        }
+
+        function loadProducts() {
+            const productsGrid = document.getElementById('products-grid');
+            productsGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300'">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <p style="font-weight: bold;">$${product.price.toFixed(2)}</p>
+                    <button onclick="addToCart(${product.id})">Add to Cart</button>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            cart.push(product);
+            updateCartCount();
+            
+            const button = event.target;
+            const originalText = button.textContent;
+            button.disabled = true;
+            button.textContent = 'Added!';
+            setTimeout(() => {
+                button.disabled = false;
+                button.textContent = originalText;
+            }, 1000);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showCheckout() {
+            if (cart.length > 0) {
+                document.getElementById('product-page').style.display = 'none';
+                document.getElementById('checkout-page').style.display = 'block';
+                document.getElementById('confirmation-page').style.display = 'none';
+                displayCartItems();
+            } else {
+                alert('Your cart is empty!');
+            }
+        }
+
+        function displayCartItems() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>$${item.price.toFixed(2)}</span>
+                    <button onclick="removeFromCart(${index})" style="width: auto; background: #666;">Remove</button>
+                `;
+                cartItems.appendChild(itemDiv);
+                total += item.price;
+            });
+
+            document.getElementById('total-amount').textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            displayCartItems();
+            
+            if (cart.length === 0) {
+                backToProducts();
+            }
+        }
+
+        function backToProducts() {
+            document.getElementById('checkout-page').style.display = 'none';
+            document.getElementById('confirmation-page').style.display = 'none';
+            document.getElementById('product-page').style.display = 'block';
+        }
+
+        function completeCheckout() {
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const postalCode = document.getElementById('postal-code').value;
+
+            if (firstName && lastName && postalCode) {
+                document.getElementById('confirmation-message').textContent = 
+                    `Thank you for your purchase, ${firstName}! Your order will be shipped to postal code ${postalCode}.`;
+                document.getElementById('checkout-page').style.display = 'none';
+                document.getElementById('confirmation-page').style.display = 'block';
+                cart = [];
+                updateCartCount();
+                document.getElementById('first-name').value = '';
+                document.getElementById('last-name').value = '';
+                document.getElementById('postal-code').value = '';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        // Handle Enter key on login
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
