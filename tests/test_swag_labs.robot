@@ -5,7 +5,8 @@ Suite Teardown    Close Browser
 
 *** Variables ***
 ${BROWSER}        Chrome
-${URL}            https://nethmiig.github.io/robot-swaglabs/swag_labs.html
+${URL}            ${URL}    https://nethmiig.github.io/robot-swaglabs/swag_labs.html
+
 ${USERNAME}       standard_user
 ${PASSWORD}       secret_sauce
 
