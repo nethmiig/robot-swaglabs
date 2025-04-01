@@ -23,13 +23,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install robotframework robotframework-seleniumlibrary
-          pip install webdrivermanager
-          webdrivermanager chrome --linkpath /usr/local/bin
-
-      - name: Install Google Chrome
-        run: |
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          pip install chromedriver-autoinstaller
 
       - name: Run Robot tests
         run: robot tests/

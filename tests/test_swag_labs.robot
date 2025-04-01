@@ -20,6 +20,7 @@ E2E Swag Labs Purchase Flow
 
 *** Keywords ***
 Open Chrome Headless
+    ${None}=    Evaluate    __import__("chromedriver_autoinstaller").install()
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
     Call Method    ${options}    add_argument    --headless
     Call Method    ${options}    add_argument    --no-sandbox
@@ -28,6 +29,7 @@ Open Chrome Headless
     Go To    ${URL}
     Maximize Browser Window
     Wait Until Element Is Visible    id=username    timeout=10s
+
 
 Log In To SwagLabs
     Input Text    id=username    ${USERNAME}
